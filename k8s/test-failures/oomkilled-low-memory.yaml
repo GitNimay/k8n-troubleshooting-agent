@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: oomkilled-low-memory
+  namespace: ai-k8s-agent-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: oomkilled-low-memory
+  template:
+    metadata:
+      labels:
+        app: oomkilled-low-memory
+    spec:
+      containers:
+        - name: app
+          image: python:3.12-alpine
+          command:
+            - sh
+            - -c
+            - |
+              python - <<'PY'
+              data = []
+              while True:
+                  data.append("x" * 1024 * 1024)
+              PY
+          resources:
+            requests:
+              memory: 16Mi
+              cpu: 10m
+            limits:
+              memory: 32Mi
+              cpu: 100m

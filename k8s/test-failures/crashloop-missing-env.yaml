@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: crashloop-missing-env
+  namespace: ai-k8s-agent-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: crashloop-missing-env
+  template:
+    metadata:
+      labels:
+        app: crashloop-missing-env
+    spec:
+      containers:
+        - name: app
+          image: python:3.12-alpine
+          command:
+            - sh
+            - -c
+            - |
+              python - <<'PY'
+              import os
+              if not os.getenv("DATABASE_URL"):
+                  raise RuntimeError("DATABASE_URL environment variable is missing")
+              PY

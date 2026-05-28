@@ -1,0 +1,28 @@
+services:
+  backend:
+    build:
+      context: ./backend
+    network_mode: host
+    env_file:
+      - ./backend/.env
+    environment:
+      FRONTEND_ORIGIN: ${FRONTEND_ORIGIN:-http://localhost:3000}
+      KUBECONFIG_PATH: /root/.kube/config
+    volumes:
+      - ${KUBECONFIG_HOST_PATH:-/root/.kube/config}:/root/.kube/config:ro
+
+  frontend:
+    build:
+      context: ./frontend
+      args:
+        NEXT_PUBLIC_API_BASE_URL: ${NEXT_PUBLIC_API_BASE_URL:-http://localhost:8000}
+        NEXT_PUBLIC_INSFORGE_BASE_URL: ${NEXT_PUBLIC_INSFORGE_BASE_URL:-}
+        NEXT_PUBLIC_INSFORGE_ANON_KEY: ${NEXT_PUBLIC_INSFORGE_ANON_KEY:-}
+    ports:
+      - "3000:3000"
+    environment:
+      NEXT_PUBLIC_API_BASE_URL: ${NEXT_PUBLIC_API_BASE_URL:-http://localhost:8000}
+      NEXT_PUBLIC_INSFORGE_BASE_URL: ${NEXT_PUBLIC_INSFORGE_BASE_URL:-}
+      NEXT_PUBLIC_INSFORGE_ANON_KEY: ${NEXT_PUBLIC_INSFORGE_ANON_KEY:-}
+    depends_on:
+      - backend

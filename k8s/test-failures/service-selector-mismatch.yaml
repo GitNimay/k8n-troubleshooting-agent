@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: selector-mismatch-app
+  namespace: ai-k8s-agent-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: selector-mismatch-app
+  template:
+    metadata:
+      labels:
+        app: selector-mismatch-app
+    spec:
+      containers:
+        - name: app
+          image: nginx:1.27-alpine
+          ports:
+            - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: selector-mismatch-service
+  namespace: ai-k8s-agent-test
+spec:
+  selector:
+    app: wrong-label
+  ports:
+    - port: 80
+      targetPort: 80

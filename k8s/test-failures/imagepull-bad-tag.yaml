@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: imagepull-bad-tag
+  namespace: ai-k8s-agent-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: imagepull-bad-tag
+  template:
+    metadata:
+      labels:
+        app: imagepull-bad-tag
+    spec:
+      containers:
+        - name: app
+          image: nginx:this-tag-does-not-exist-for-agent-testing
+          ports:
+            - containerPort: 80
