@@ -28,37 +28,6 @@ In simple terms, the frontend gives you a clean interface, and the backend does 
 - Docker Compose setup for running the backend and frontend together.
 - Kubernetes failure manifests for local and end to end testing.
 
-## Project Structure
-
-```text
-.
-+ backend
-  + app
-    + ai
-    + api
-    + core
-    + kubernetes
-    + models
-    + services
-  + Dockerfile
-  + requirements.txt
-+ frontend
-  + src
-    + app
-    + components
-    + hooks
-    + lib
-    + services
-    + types
-  + Dockerfile
-  + package.json
-+ docs
-+ k8s
-  + test-failures
-+ prompts
-+ docker-compose.yml
-```
-
 ## Requirements
 
 Install these tools before running the project:
