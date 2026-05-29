@@ -4,6 +4,22 @@
 
 :root {
   color-scheme: light;
+  --canvas: #fdfcfc;
+  --ink: #201d1d;
+  --ink-deep: #0f0000;
+  --charcoal: #302c2c;
+  --body: #424245;
+  --mute: #646262;
+  --ash: #9a9898;
+  --surface-soft: #f8f7f7;
+  --surface-card: #f1eeee;
+  --surface-dark: #201d1d;
+  --surface-dark-elevated: #302c2c;
+  --hairline: rgba(15, 0, 0, 0.12);
+  --hairline-strong: #646262;
+  --danger: #ff3b30;
+  --warning: #ff9f0a;
+  --success: #30d158;
 }
 
 * {
@@ -17,8 +33,8 @@ body {
 
 body {
   margin: 0;
-  background: #fdfcfc;
-  color: #201d1d;
+  background: var(--canvas);
+  color: var(--ink);
 }
 
 button,
@@ -26,4 +42,146 @@ input,
 textarea,
 select {
   font: inherit;
+}
+
+::selection {
+  background: var(--ink);
+  color: var(--canvas);
+}
+
+@layer components {
+  .app-canvas {
+    background:
+      linear-gradient(var(--hairline) 1px, transparent 1px),
+      linear-gradient(90deg, var(--hairline) 1px, transparent 1px),
+      var(--canvas);
+    background-size: 48px 48px;
+    background-position: -1px -1px;
+  }
+
+  .hairline-panel {
+    border-top: 1px solid var(--hairline);
+    border-bottom: 1px solid var(--hairline);
+  }
+
+  .button-primary {
+    min-height: 36px;
+    border-radius: 4px;
+    background: var(--ink);
+    padding: 2px 20px;
+    color: var(--canvas);
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 2;
+    transition: transform 160ms ease, background-color 160ms ease, color 160ms ease;
+  }
+
+  .button-primary:active {
+    background: var(--ink-deep);
+    transform: translateY(1px);
+  }
+
+  .button-primary:disabled {
+    background: var(--surface-card);
+    color: var(--ash);
+    transform: none;
+  }
+
+  .button-secondary {
+    min-height: 36px;
+    border: 1px solid var(--hairline-strong);
+    border-radius: 4px;
+    background: var(--canvas);
+    padding: 2px 20px;
+    color: var(--ink);
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 2;
+    transition: transform 160ms ease, border-color 160ms ease, background-color 160ms ease;
+  }
+
+  .button-secondary:active {
+    transform: translateY(1px);
+  }
+
+  .tab-button {
+    min-height: 44px;
+    border-bottom: 2px solid transparent;
+    padding: 8px 16px;
+    color: var(--mute);
+    font-size: 16px;
+    line-height: 1.5;
+    transition: color 160ms ease, border-color 160ms ease, background-color 160ms ease;
+  }
+
+  .tab-button-active {
+    border-bottom-color: var(--ash);
+    color: var(--ink);
+  }
+
+  .terminal-panel {
+    background: var(--surface-dark);
+    color: var(--canvas);
+  }
+
+  .terminal-row {
+    border-radius: 4px;
+    background: var(--surface-dark-elevated);
+    color: var(--canvas);
+  }
+
+  .page-enter {
+    animation: page-in 320ms ease both;
+  }
+
+  .row-enter {
+    animation: row-in 260ms ease both;
+  }
+
+  .pulse-marker {
+    animation: marker-pulse 980ms ease-in-out infinite;
+  }
+}
+
+@keyframes page-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes row-in {
+  from {
+    opacity: 0;
+    transform: translateX(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes marker-pulse {
+  0%,
+  100% {
+    opacity: 0.42;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
 }

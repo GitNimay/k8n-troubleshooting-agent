@@ -31,7 +31,7 @@ export function AuthPanel() {
   }
 
   return (
-    <main className="min-h-screen bg-[#fdfcfc] px-6 py-10 text-[#201d1d]">
+    <main className="app-canvas min-h-screen px-6 py-10 text-[#201d1d]">
       <section className="mx-auto max-w-[960px]">
         <header className="border-b border-[rgba(15,0,0,0.12)] pb-4">
           <p className="text-sm leading-7 text-[#646262]">[auth]</p>
@@ -40,11 +40,23 @@ export function AuthPanel() {
           </h1>
         </header>
 
-        <form onSubmit={handleSubmit} className="mt-16 max-w-[520px]">
-          <h2 className="text-base font-bold leading-6">
-            {mode === "signin" ? "Login" : "Create account"}
-          </h2>
-          <div className="mt-4 border-t border-[rgba(15,0,0,0.12)] pt-4">
+        <section className="terminal-panel mt-10 px-4 py-5 page-enter sm:px-6">
+          <p className="text-sm leading-7 text-[#9a9898]">[session]</p>
+          <div className="terminal-row mt-2 p-3 text-sm leading-6 sm:text-base">
+            [ ] authenticate --provider email --workspace k8n
+          </div>
+        </section>
+
+        <form onSubmit={handleSubmit} className="mt-16 max-w-[520px] page-enter">
+          <div className="flex items-center justify-between border-b border-[rgba(15,0,0,0.12)] pb-3">
+            <h2 className="text-base font-bold leading-6">
+              {mode === "signin" ? "Login" : "Create account"}
+            </h2>
+            <span className="text-sm leading-7 text-[#646262]">
+              {mode === "signin" ? "[existing]" : "[new]"}
+            </span>
+          </div>
+          <div className="pt-4">
             <label className="block text-sm leading-7 text-[#646262]" htmlFor="email">
               Email
             </label>
@@ -79,14 +91,14 @@ export function AuthPanel() {
             <button
               type="submit"
               disabled={isSubmitting || Boolean(configError)}
-              className="min-h-9 rounded bg-[#201d1d] px-5 text-base font-medium leading-8 text-[#fdfcfc] disabled:bg-[#f1eeee] disabled:text-[#9a9898]"
+              className="button-primary"
             >
               {isSubmitting ? "Working..." : mode === "signin" ? "Login" : "Sign up"}
             </button>
             <button
               type="button"
               onClick={() => setMode(mode === "signin" ? "signup" : "signin")}
-              className="min-h-9 rounded border border-[#646262] bg-[#fdfcfc] px-5 text-base font-medium leading-8"
+              className="button-secondary"
             >
               {mode === "signin" ? "Create account" : "Use login"}
             </button>
@@ -96,4 +108,3 @@ export function AuthPanel() {
     </main>
   );
 }
-
