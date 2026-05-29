@@ -12,7 +12,9 @@ The goal was not to replace DevOps or SRE teams. The goal was to reduce the repe
 
 In this post, I will walk through the complete build: the project idea, the architecture, the InsForge setup, the backend server, the AI reasoning flow, Docker setup, local Kubernetes testing with kind, and the failure simulations I used to verify the bot.
 
-<iframe src="https://player.cloudinary.com/embed/?cloud_name=dvzxfbcsd&public_id=ure1r9btbydoqrfqlyix" width="100%" height="450" allow="autoplay; fullscreen; encrypted-media; picture-in-picture" allowfullscreen></iframe>
+<video controls width="100%">
+  <source src="https://res.cloudinary.com/dvzxfbcsd/video/upload/v1780040031/xspqke1mjgc6idbz1z8d.mp4" type="video/mp4">
+</video>
 
 ## What We Are Building
 
@@ -425,7 +427,9 @@ The result is a bot that can inspect a cluster, identify common failures, explai
 
 It is not a replacement for experienced engineers. It is a faster first pass, a learning tool for developers, and a foundation for a more complete incident response assistant.
 
-<iframe src="https://drive.google.com/file/d/1zCQnpJaHhkxlW3Y3qbd9noGieh-cZ-3g/preview" width="100%" height="480" allow="autoplay"></iframe>
+<video controls width="100%">
+  <source src="https://res.cloudinary.com/dvzxfbcsd/video/upload/v1780040157/wivflzkzl3rbeq5wdct1.mp4" type="video/mp4">
+</video>
 
 ## References
 

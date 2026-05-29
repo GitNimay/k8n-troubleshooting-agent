@@ -1,3 +1,5 @@
+![AI Kubernetes Troubleshooting Agent cover](https://raw.githubusercontent.com/GitNimay/Gitnimay-HostedImages/main/blog/ChatGPT%20Image%20May%2029%2C%202026%2C%2012_49_55%20PM.png)
+
 # AI Kubernetes Troubleshooting Agent
 
 AI Kubernetes Troubleshooting Agent is a web application that helps inspect a Kubernetes cluster, collect useful failure evidence, and generate a clear root cause report.
