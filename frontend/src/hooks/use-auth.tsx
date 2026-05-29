@@ -43,9 +43,21 @@ export function AuthProvider({ children }: Readonly<{ children: ReactNode }>) {
       const savedToken = window.localStorage.getItem(TOKEN_KEY);
       setToken(savedToken);
 
-      const { data } = await insforge.auth.getCurrentUser();
-      setUser(data?.user ?? null);
-      setIsLoaded(true);
+      let timeoutId: ReturnType<typeof setTimeout> | undefined;
+      try {
+        const timeout = new Promise<never>((_, reject) => {
+          timeoutId = setTimeout(() => reject(new Error("Auth session check timed out.")), 5000);
+        });
+        const { data } = await Promise.race([insforge.auth.getCurrentUser(), timeout]);
+        setUser(data?.user ?? null);
+      } catch {
+        setUser(null);
+      } finally {
+        if (timeoutId) {
+          clearTimeout(timeoutId);
+        }
+        setIsLoaded(true);
+      }
     }
 
     loadUser();

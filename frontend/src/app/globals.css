@@ -51,12 +51,7 @@ select {
 
 @layer components {
   .app-canvas {
-    background:
-      linear-gradient(var(--hairline) 1px, transparent 1px),
-      linear-gradient(90deg, var(--hairline) 1px, transparent 1px),
-      var(--canvas);
-    background-size: 48px 48px;
-    background-position: -1px -1px;
+    background: var(--canvas);
   }
 
   .hairline-panel {
